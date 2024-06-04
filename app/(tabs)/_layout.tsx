@@ -1,9 +1,13 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { StyleSheet, View } from 'react-native';
+
+import { HomeIcon as HomeIconOutline, UserIcon, WalletIcon } from "react-native-heroicons/outline";
+import { ListBulletIcon as ListBulletIconOutline } from "react-native-heroicons/outline";
+import { PlusIcon as PlusIconOutline } from "react-native-heroicons/outline";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -19,19 +23,65 @@ export default function TabLayout() {
         options={{
           title: 'Home',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+            <HomeIconOutline color={color} />
           ),
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
-          title: 'Explore',
+          title: 'Transactions',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            <ListBulletIconOutline color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="add"
+        options={{
+          title: '',
+          tabBarIcon: ({ color, focused }) => (
+            <View style={styles.addBtn}>
+              <PlusIconOutline color="white" />
+            </View>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="wallet"
+        options={{
+          title: 'Wallet',
+          tabBarIcon: ({ color, focused }) => (
+            <WalletIcon color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="account"
+        options={{
+          title: 'Account',
+          tabBarIcon: ({ color, focused }) => (
+            <UserIcon color={color} />
           ),
         }}
       />
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  addBtn: {
+    width: 60,
+    height: 60,
+    borderRadius: 100,
+    marginBottom: 20,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: 'white',
+    backgroundColor: 'black'
+  },
+  addIcon: {
+    color: 'white',
+  }
+});
